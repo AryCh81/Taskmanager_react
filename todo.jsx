@@ -1,25 +1,39 @@
-import React from 'react'
+import React from 'react';
 
-const todo = (prop) => {
+const Todo = (prop) => {
 
-    const [check, setcheck] = useState(false);
-    const handleclick = () => {
-        setcheck(!check);
-      };
     return (
 
-        <div className={prop.classes}>
+        <div key={prop.id} className="flex justify ml-8 my-4">
 
-            <div><input type="checkbox" onClick={handleclick} className="accent-blue-500 mr-2" /></div>
+            <div>
+                <input
+                    name={prop.id}
+                    onChange={prop.handlecheckbox}
+                    type="checkbox"
+                    checked={prop.isCompleted}
+                    className="accent-blue-500 mr-2"
+                />
+            </div>
 
-            <div className=' font-medium w-[45vw]'>{prop.task}</div>
+            <div className={`font-medium w-[60vw] text-justify break-words md:w-[45vw] ${prop.isCompleted ? "line-through" : ""}`}>
+                {prop.value}
+            </div>
+
             <div className='flex gap-1 cursor-pointer'>
-                <div className=' bg-violet-600 w-7 h-7 rounded-md p-1'><img width={20} height={20} src="edit.svg" alt="img" /></div>
-                <div className=' bg-violet-600 w-7 h-7 rounded-md p-1'><img width={20} height={20} src="delete.svg" alt="img" /></div>
+
+                <div onClick={prop.handleedit} className='bg-violet-600 w-7 h-7 rounded-md p-1'>
+                    <img width={20} height={20} src="edit.svg" alt="Edit" />
+                </div>
+                <div onClick={prop.handledelete} className='bg-violet-600 w-7 h-7 rounded-md p-1'>
+                    <img width={20} height={20} src="delete.svg" alt="Delete" />
+                </div>
+
             </div>
 
         </div>
-    )
-}
+        
+    );
+};
 
-export default todo
+export default Todo;
